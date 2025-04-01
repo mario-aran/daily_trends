@@ -1,7 +1,3 @@
-import "dotenv/config";
+import 'dotenv/config';
 
-export const {
-  NODE_ENV = "",
-  SERVER_PORT = "",
-  DATABASE_URL = "",
-} = process.env;
+export const { NODE_ENV = '', SERVER_PORT = '' } = process.env;

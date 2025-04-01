@@ -17,7 +17,8 @@
     "files:to-lf": "find . -type f ! -path './node_modules/*' ! -path './dist/*' -exec dos2unix {} +",
     "dev": "tsx watch src/app/index.ts",
     "build": "tsc && tsc-alias",
-    "start": "node dist/app/index.js"
+    "start": "node dist/app/index.js",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "dotenv": "^16.4.7",
@@ -26,6 +27,7 @@
   "devDependencies": {
     "@types/express": "^5.0.1",
     "@types/node": "^22.13.17",
+    "prettier": "^3.5.3",
     "tsc-alias": "^1.8.13",
     "tsx": "^4.19.3",
     "typescript": "^5.8.2"
