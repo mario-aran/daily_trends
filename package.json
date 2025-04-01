@@ -1,0 +1,16 @@
+{
+  "name": "daily_trends",
+  "version": "1.0.0",
+  "private": true,
+  "main": "app/index.js",
+  "author": "Mario Arancibia",
+  "license": "ISC",
+  "engines": {
+    "node": ">=22",
+    "pnpm": ">=10"
+  },
+  "scripts": {
+    "clean:all": "find . -type d \\( -name 'node_modules' -o -name 'dist' \\) -prune -exec rm -rf {} +",
+    "files:to-lf": "find . -type f ! -path './node_modules/*' ! -path './dist/*' -exec dos2unix {} +"
+  }
+}
