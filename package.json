@@ -9,8 +9,24 @@
     "node": ">=22",
     "pnpm": ">=10"
   },
+  "pnpm": {
+    "neverBuiltDependencies": []
+  },
   "scripts": {
     "clean:all": "find . -type d \\( -name 'node_modules' -o -name 'dist' \\) -prune -exec rm -rf {} +",
-    "files:to-lf": "find . -type f ! -path './node_modules/*' ! -path './dist/*' -exec dos2unix {} +"
+    "files:to-lf": "find . -type f ! -path './node_modules/*' ! -path './dist/*' -exec dos2unix {} +",
+    "dev": "tsx watch src/app/index.ts",
+    "build": "tsc && tsc-alias",
+    "start": "node dist/app/index.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.13.17",
+    "tsc-alias": "^1.8.13",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
   }
 }
