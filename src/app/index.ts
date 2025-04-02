@@ -2,8 +2,8 @@
 
 import { dbConnect } from '@/config/db-connect';
 import { SERVER_PORT } from '@/config/env';
-import { errorHandler } from '@/middleware/error-handler';
-import { notFound } from '@/middleware/not-found';
+import { handleNotFound } from '@/middleware/handle-not-found';
+import { handleRouteError } from '@/middleware/handle-route-error';
 import express from 'express';
 import { router } from './router';
 
@@ -19,13 +19,19 @@ const startServer = async () => {
   // Router setup
   app.use('/api', router);
 
-  // Error handlers setup
-  app.use(notFound); // Not found handler: Must be after all route definitions
-  app.use(errorHandler); // Global error handler: Must be the last middleware
+  // Handle route errors
+  app.use(handleNotFound); // Must be placed after all route definitions
+  app.use(handleRouteError); // Must be the last middleware
 
   // Start the server
-  app.listen(SERVER_PORT, () => {
+  const server = app.listen(SERVER_PORT, () => {
     console.log(`Server running on port: ${SERVER_PORT}`);
+  });
+
+  // Handle server startup errors
+  server.on('error', (error) => {
+    console.error('Server failed to start:', error);
+    process.exit(1);
   });
 };
 
