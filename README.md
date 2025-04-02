@@ -8,13 +8,13 @@
 
 ## Tareas Previas
 
-- [ ] Crear un repo público en github.
-- [ ] Antes de empezar las tareas, enviar el enlace del repositorio por mail.
+- [x] Crear un repo público en github.
+- [x] Antes de empezar las tareas, enviar el enlace del repositorio por mail.
 - Mínimo un commit por tarea.
 
 ## Tareas
 
-- [ ] Crear un proyecto TypeScript con la arquitectura de ficheros a elección.
+- [x] Crear un proyecto TypeScript con la arquitectura de ficheros a elección.
 - [ ] Crear un modelo de feed y sus atributos. Utilizar MongoDB y algún ODM.
 - [ ] Definir los endpoints para gestionar los servicios CRUD del modelo Feed. Desacoplar las capas de la API al máximo.
 - [ ] Crear un “servicio de lectura de feeds” que extraiga por web scraping las noticias de portada y las guarde como Feeds (usar OOP).
