@@ -15,7 +15,7 @@
 ## Tareas
 
 - [x] Crear un proyecto TypeScript con la arquitectura de ficheros a elección.
-- [ ] Crear un modelo de feed y sus atributos. Utilizar MongoDB y algún ODM.
+- [x] Crear un modelo de feed y sus atributos. Utilizar MongoDB y algún ODM.
 - [ ] Definir los endpoints para gestionar los servicios CRUD del modelo Feed. Desacoplar las capas de la API al máximo.
 - [ ] Crear un “servicio de lectura de feeds” que extraiga por web scraping las noticias de portada y las guarde como Feeds (usar OOP).
 
