@@ -1,7 +1,7 @@
 import { ErrorWithStatus } from '@/types/error-with-status';
 import { NextFunction, Request, Response } from 'express';
 
-export const errorHandler = (
+export const handleRouteError = (
   err: ErrorWithStatus,
   _req: Request,
   res: Response,

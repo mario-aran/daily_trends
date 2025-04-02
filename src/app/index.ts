@@ -1,20 +1,38 @@
 // WARNING: This file is used by a script in "package.json". Do not rename or move
 
+import { dbConnect } from '@/config/db-connect';
 import { SERVER_PORT } from '@/config/env';
-import { errorHandler } from '@/middleware/error-handler';
-import { notFound } from '@/middleware/not-found';
+import { handleNotFound } from '@/middleware/handle-not-found';
+import { handleRouteError } from '@/middleware/handle-route-error';
 import express from 'express';
 import { router } from './router';
 
 const app = express();
 
-// Router
+// Middleware setup
 app.use(express.json()); // JSON payloads
-app.use('/api', router); // API router
-app.use(notFound); // Not found route: Must be placed after all defined routes
-app.use(errorHandler); // Centralized error handler: Must be the last middleware
 
-// Start the server
-app.listen(SERVER_PORT, () => {
-  console.log(`Server running on port: ${SERVER_PORT}`);
-});
+const startServer = async () => {
+  // Database setup
+  await dbConnect();
+
+  // Router setup
+  app.use('/api', router);
+
+  // Handle route errors
+  app.use(handleNotFound); // Must be placed after all route definitions
+  app.use(handleRouteError); // Must be the last middleware
+
+  // Start the server
+  const server = app.listen(SERVER_PORT, () => {
+    console.log(`Server running on port: ${SERVER_PORT}`);
+  });
+
+  // Handle server startup errors
+  server.on('error', (error) => {
+    console.error('Server failed to start:', error);
+    process.exit(1);
+  });
+};
+
+startServer();
