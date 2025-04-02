@@ -1,8 +1,8 @@
-import { Request, Response, Router } from 'express';
+import { feedsController } from '@/features/feeds/feeds.controller';
+import { routeCatchAsync } from '@/utils/route-catch-async';
+import { Router } from 'express';
 
 export const feedsRoute = Router();
 
 // Route definitions
-feedsRoute.get('/', (_req: Request, res: Response) => {
-  res.json({ message: 'Hello API' });
-});
+feedsRoute.get('/', routeCatchAsync(feedsController.getTopFeeds));
