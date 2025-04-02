@@ -1,7 +1,7 @@
 import { Feed } from './feed.model';
 
 class FeedsService {
-  async getAll() {
+  public async getAll() {
     const feeds = await Feed.find();
     return feeds;
   }
