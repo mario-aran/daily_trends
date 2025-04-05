@@ -2,7 +2,7 @@
   "name": "daily_trends",
   "version": "1.0.0",
   "private": true,
-  "main": "app/index.js",
+  "main": "server/index.js",
   "author": "Mario Arancibia",
   "license": "ISC",
   "engines": {
@@ -15,9 +15,9 @@
   "scripts": {
     "clean:all": "find . -type d \\( -name 'node_modules' -o -name 'dist' \\) -prune -exec rm -rf {} +",
     "files:to-lf": "find . -type f ! -path './node_modules/*' ! -path './dist/*' -exec dos2unix {} +",
-    "dev": "tsx watch src/app/index.ts",
+    "dev": "tsx watch src/server/index.ts",
     "build": "tsc && tsc-alias",
-    "start": "node dist/app/index.js",
+    "start": "node dist/server/index.js",
     "format": "prettier --write .",
     "lint": "tsc --noEmit && eslint . --fix"
   },
@@ -26,21 +26,21 @@
     "cheerio": "^1.0.0",
     "dotenv": "^16.4.7",
     "express": "^5.1.0",
-    "mongoose": "^8.13.1"
+    "mongoose": "^8.13.2"
   },
   "devDependencies": {
-    "@eslint/js": "^9.23.0",
+    "@eslint/js": "^9.24.0",
     "@types/cheerio": "^0.22.35",
     "@types/express": "^5.0.1",
     "@types/node": "^22.14.0",
-    "eslint": "^9.23.0",
+    "eslint": "^9.24.0",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-check-file": "^3.1.0",
     "globals": "^16.0.0",
     "prettier": "^3.5.3",
     "tsc-alias": "^1.8.13",
     "tsx": "^4.19.3",
-    "typescript": "^5.8.2",
+    "typescript": "^5.8.3",
     "typescript-eslint": "^8.29.0"
   }
 }
