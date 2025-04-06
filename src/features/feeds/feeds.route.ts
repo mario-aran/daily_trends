@@ -9,7 +9,7 @@ const FEEDS_ID_PATH = 'feeds/:id';
 const feedsRoute = Router();
 
 // Root: Added separately because of this: "Al abrir la API, se deben mostrar las 5 noticias de..."
-feedsRoute.get('/', routeCatchAsync(feedsController.readTop));
+feedsRoute.get('/', routeCatchAsync(feedsController.readTopFive));
 
 // Feeds
 feedsRoute.get(`/${FEEDS_PATH}`, routeCatchAsync(feedsController.readAll));
