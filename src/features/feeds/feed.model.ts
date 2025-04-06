@@ -1,6 +1,14 @@
 import mongoose, { Schema } from 'mongoose';
 
-const FeedSchema = new Schema(
+interface IFeed {
+  url: string;
+  headline: string;
+  source: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+const FeedSchema = new Schema<IFeed>(
   {
     url: { type: String, required: true, unique: true },
     headline: { type: String, required: true },
@@ -9,4 +17,4 @@ const FeedSchema = new Schema(
   { timestamps: true },
 );
 
-export const Feed = mongoose.model('Feed', FeedSchema);
+export const Feed = mongoose.model<IFeed>('Feed', FeedSchema);
