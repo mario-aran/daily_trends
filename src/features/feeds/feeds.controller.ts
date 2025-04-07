@@ -1,5 +1,7 @@
+import { HttpError } from '@/utils/http-error';
 import { Request, Response } from 'express';
 import { feedsService } from './feeds.service';
+import { ReadAllFeeds } from './types';
 
 class FeedsController {
   public async readTopFive(_: Request, res: Response) {
@@ -7,13 +9,17 @@ class FeedsController {
     res.json(topFiveFeeds);
   }
 
-  public async readAll(req: Request, res: Response) {
+  public async readAll(
+    req: Request<unknown, unknown, unknown, ReadAllFeeds>,
+    res: Response,
+  ) {
     const feeds = await feedsService.readAll(req.query);
     res.json(feeds);
   }
 
   public async read(req: Request, res: Response) {
     const feed = await feedsService.read(req.params.id);
+    if (!feed) throw new HttpError(404, 'Feed not found');
     res.json(feed);
   }
 
@@ -24,11 +30,13 @@ class FeedsController {
 
   public async update(req: Request, res: Response) {
     const updatedFeed = await feedsService.update(req.params.id, req.body);
+    if (!updatedFeed) throw new HttpError(404, 'Feed not found');
     res.json(updatedFeed);
   }
 
   public async delete(req: Request, res: Response) {
     const deletedFeed = await feedsService.delete(req.params.id);
+    if (!deletedFeed) throw new HttpError(404, 'Feed not found');
     res.json(deletedFeed);
   }
 }
