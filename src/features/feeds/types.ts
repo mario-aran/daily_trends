@@ -1,8 +1,7 @@
 export interface ReadAllFeeds {
-  source: string;
-  sortOrder: 'asc' | 'desc';
-  limit: number;
-  skip: number;
+  sortOrder?: 'asc' | 'desc';
+  limit?: number;
+  skip?: number;
 }
 
 export interface CreateFeed {

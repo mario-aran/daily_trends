@@ -26,12 +26,14 @@
     "cheerio": "^1.0.0",
     "dotenv": "^16.4.7",
     "express": "^5.1.0",
+    "luxon": "^3.6.1",
     "mongoose": "^8.13.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.24.0",
     "@types/cheerio": "^0.22.35",
     "@types/express": "^5.0.1",
+    "@types/luxon": "^3.6.2",
     "@types/node": "^22.14.0",
     "eslint": "^9.24.0",
     "eslint-config-prettier": "^10.1.1",
