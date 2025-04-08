@@ -5,7 +5,8 @@
 - levantar base de datos: `docker compose up -d`
 - instalar dependencias: `pnpm install`
 - correr aplicación: `pnpm run dev`
-- url: "http://localhost:3000/api"
+- api url: "http://localhost:3000/api"
+- mongo express url: "http://localhost:8081"
 
 ## Librerías
 

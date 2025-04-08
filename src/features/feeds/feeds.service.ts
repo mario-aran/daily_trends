@@ -2,7 +2,11 @@ import axios from 'axios';
 import * as cheerio from 'cheerio';
 import { DateTime } from 'luxon';
 import { Feed } from './feed.model';
-import { CreateFeed, ReadAllFeeds, UpdateFeed } from './types';
+import {
+  FeedsZodCreateBody,
+  FeedsZodReadAllQuery,
+  FeedsZodUpdateBody,
+} from './feeds.zod';
 
 // Constants
 const SOURCES = [
@@ -67,23 +71,27 @@ class FeedsService {
     ]);
   }
 
-  public readAll({ sortOrder = 'asc', limit = 25, skip = 0 }: ReadAllFeeds) {
+  public async readAll({
+    sortOrder = 'asc',
+    limit = 25,
+    skip = 0,
+  }: FeedsZodReadAllQuery) {
     return Feed.find().sort({ _id: sortOrder }).limit(limit).skip(skip);
   }
 
-  public read(id: string) {
+  public async read(id: string) {
     return Feed.findById(id);
   }
 
-  public create(createProps: CreateFeed) {
+  public async create(createProps: FeedsZodCreateBody) {
     return Feed.create(createProps);
   }
 
-  public update(id: string, updateProps: UpdateFeed) {
+  public async update(id: string, updateProps: FeedsZodUpdateBody) {
     return Feed.findByIdAndUpdate(id, updateProps);
   }
 
-  public delete(id: string) {
+  public async delete(id: string) {
     return Feed.findByIdAndDelete(id);
   }
 }

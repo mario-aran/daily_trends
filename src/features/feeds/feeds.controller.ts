@@ -1,7 +1,7 @@
 import { HttpError } from '@/utils/http-error';
 import { Request, Response } from 'express';
 import { feedsService } from './feeds.service';
-import { ReadAllFeeds } from './types';
+import { FeedsZodReadAllQuery } from './feeds.zod';
 
 class FeedsController {
   public async readTopFive(_: Request, res: Response) {
@@ -10,7 +10,7 @@ class FeedsController {
   }
 
   public async readAll(
-    req: Request<unknown, unknown, unknown, ReadAllFeeds>,
+    req: Request<unknown, unknown, unknown, FeedsZodReadAllQuery>,
     res: Response,
   ) {
     const feeds = await feedsService.readAll(req.query);
