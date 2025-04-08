@@ -92,7 +92,7 @@ class FeedsService {
   }
 
   public async update(id: string, updateProps: FeedsZodUpdateBody) {
-    return Feed.findByIdAndUpdate(id, updateProps);
+    return Feed.findByIdAndUpdate(id, updateProps, { new: true });
   }
 
   public async delete(id: string) {

@@ -20,24 +20,35 @@ class FeedsController {
   public async read(req: Request, res: Response) {
     const feed = await feedsService.read(req.params.id);
     if (!feed) throw new HttpError(404, 'Feed not found');
+
     res.json(feed);
   }
 
   public async create(req: Request, res: Response) {
     const createdFeed = await feedsService.create(req.body);
-    res.status(201).json(createdFeed);
+    res.status(201).json({
+      message: 'Feed created successfully',
+      newFeed: createdFeed,
+    });
   }
 
   public async update(req: Request, res: Response) {
     const updatedFeed = await feedsService.update(req.params.id, req.body);
     if (!updatedFeed) throw new HttpError(404, 'Feed not found');
-    res.json(updatedFeed);
+
+    res.json({
+      message: 'Feed updated successfully',
+      newValues: updatedFeed,
+    });
   }
 
   public async delete(req: Request, res: Response) {
     const deletedFeed = await feedsService.delete(req.params.id);
     if (!deletedFeed) throw new HttpError(404, 'Feed not found');
-    res.json(deletedFeed);
+
+    res.json({
+      message: `Feed ${deletedFeed._id} deleted successfully`,
+    });
   }
 }
 
