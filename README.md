@@ -52,8 +52,3 @@ Otros Detalles
 - Utilizar las buenas prácticas que conozcas.
 - Demostrar conocimientos de OOP: abstracción, encapsulamiento, herencia y polimorfismo.
 - [ ] Realizar los tests que consideres necesarios.
-
----
-
-- [ ] jest config file
-- [ ] add eslint jest plugin to eslintconfig

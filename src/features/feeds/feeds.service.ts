@@ -15,59 +15,63 @@ const SOURCES = [
 ] as const;
 
 class FeedsService {
-  private getCurrentSpainDate() {
-    const currentDate = DateTime.now().setZone('Europe/Madrid');
-    const startOfTodaySpain = currentDate.startOf('day').toJSDate();
-    const endOfTodaySpain = currentDate.endOf('day').toJSDate();
+  private async scrapeTopFiveFeeds() {
+    const allFeeds: FeedsZodCreateBody[] = [];
 
-    return {
-      startOfTodaySpain,
-      endOfTodaySpain,
-    };
-  }
-
-  private async scrapeFeeds() {
     for (const source of SOURCES) {
+      // Fetch top 5 feeds from source
       const { data } = await axios.get(source.url);
       const $ = cheerio.load(data);
       const feeds = $(source.selector).slice(0, 5).toArray();
 
-      // Prepare array of promises
-      const feedPromises = feeds.map(async (feed) => {
-        const headline = $(feed).text().trim();
-        const url = $(feed).attr('href') || '';
+      // Map the essential values
+      const sourceFeeds = feeds.map(
+        (feed): FeedsZodCreateBody => ({
+          url: $(feed).attr('href') || '',
+          headline: $(feed).text().trim(),
+          source: source.name,
+        }),
+      );
 
-        const newFeed = await Feed.findOne({ url });
-
-        if (!newFeed)
-          return Feed.create({ url, headline, source: source.name }).catch(() =>
-            console.error(`Failed to insert ${url.slice(0, 10)}`),
-          );
-      });
-
-      // Insert feeds
-      await Promise.all(feedPromises);
+      // Push flatten values to allFeeds
+      allFeeds.push(...sourceFeeds);
     }
+
+    return allFeeds;
+  }
+
+  private getCurrentSpainDate() {
+    const currentDate = DateTime.now().setZone('Europe/Madrid');
+
+    return {
+      startJSDate: currentDate.startOf('day').toJSDate(),
+      endJSDate: currentDate.endOf('day').toJSDate(),
+    };
   }
 
   public async readTopFive() {
     // Scrape feeds
-    await this.scrapeFeeds();
+    const scrapedFeeds = await this.scrapeTopFiveFeeds();
+
+    // Insert non-existing feeds
+    for (const scrapedFeed of scrapedFeeds) {
+      await Feed.create(scrapedFeed).catch((err) => {
+        const shortHeadline = scrapedFeed.headline.slice(0, 10);
+        console.error(`Error inserting feed ${shortHeadline}: ${err.message}`);
+      });
+    }
 
     // Get Spain current date
-    const { startOfTodaySpain, endOfTodaySpain } = this.getCurrentSpainDate();
+    const { startJSDate, endJSDate } = this.getCurrentSpainDate();
 
+    // Query top five feeds from each source
     return Feed.aggregate([
-      {
-        $match: {
-          createdAt: { $gte: startOfTodaySpain, $lte: endOfTodaySpain },
-        },
-      },
+      { $match: { createdAt: { $gte: startJSDate, $lte: endJSDate } } },
       { $sort: { source: 1, _id: -1 } },
-      { $group: { _id: '$source', docs: { $push: '$$ROOT' } } },
-      { $project: { docs: { $slice: ['$docs', 5] } } },
-      { $unwind: '$docs' },
-      { $replaceRoot: { newRoot: '$docs' } },
+      { $group: { _id: '$source', docs: { $push: '$$ROOT' } } }, // Group by source
+      { $project: { docs: { $slice: ['$docs', 5] } } }, // Limit each source to top five
+      { $unwind: '$docs' }, // Flatten docs
+      { $replaceRoot: { newRoot: '$docs' } }, // Replace results with docs
     ]);
   }
 
