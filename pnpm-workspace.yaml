@@ -1,0 +1,4 @@
+# "pnpm approve-builds": Add your approved dependencies for running scripts here
+onlyBuiltDependencies:
+  - esbuild
+  - mongodb-memory-server

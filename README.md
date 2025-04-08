@@ -3,8 +3,8 @@
 ## Descripción
 
 - Hacer API que exponga un feed de noticias. El feed es un agregador de noticias de portadas de periódicos número uno ("El País" y "El Mundo").
-- [ ] Al abrir la API, se deben mostrar las 5 noticias de portada del día actual de "El País" y de "El Mundo".
-- [ ] Se pueden añadir noticias a mano desde la API.
+- [x] Al abrir la API, se deben mostrar las 5 noticias de portada del día actual de "El País" y de "El Mundo".
+- [x] Se pueden añadir noticias a mano desde la API.
 
 ## Tareas Previas
 
@@ -16,8 +16,8 @@
 
 - [x] Crear un proyecto TypeScript con la arquitectura de ficheros a elección.
 - [x] Crear un modelo de feed y sus atributos. Utilizar MongoDB y algún ODM.
-- [ ] Definir los endpoints para gestionar los servicios CRUD del modelo Feed. Desacoplar las capas de la API al máximo.
-- [ ] Crear un “servicio de lectura de feeds” que extraiga por web scraping las noticias de portada y las guarde como Feeds (usar OOP).
+- [x] Definir los endpoints para gestionar los servicios CRUD del modelo Feed. Desacoplar las capas de la API al máximo.
+- [x] Crear un “servicio de lectura de feeds” que extraiga por web scraping las noticias de portada y las guarde como Feeds (usar OOP).
 
 ## Otros Detalles
 
