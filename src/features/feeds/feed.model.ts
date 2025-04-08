@@ -1,13 +1,20 @@
 import mongoose, { Schema } from 'mongoose';
 
-// Constants
-export const FEED_MODEL_NAME = 'Feed'; // Used for mongoose references
+interface IFeed {
+  url: string;
+  headline: string;
+  source: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
 
-const FeedSchema = new Schema(
+const FeedSchema = new Schema<IFeed>(
   {
-    title: { type: String, required: true },
+    url: { type: String, required: true, unique: true },
+    headline: { type: String, required: true },
+    source: { type: String, required: true },
   },
   { timestamps: true },
 );
 
-export const Feed = mongoose.model(FEED_MODEL_NAME, FeedSchema);
+export const Feed = mongoose.model<IFeed>('Feed', FeedSchema);

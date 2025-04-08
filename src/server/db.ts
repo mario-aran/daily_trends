@@ -1,7 +1,7 @@
 import { MONGODB_URI } from '@/config/env';
 import mongoose from 'mongoose';
 
-export const dbConnect = async () => {
+export const connectDB = async () => {
   try {
     await mongoose.connect(MONGODB_URI);
     console.log('MongoDB connected successfully');
