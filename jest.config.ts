@@ -2,7 +2,7 @@ import type { Config } from 'jest';
 
 const config: Config = {
   testEnvironment: 'node',
-  transform: { '^.+\\.tsx?$': ['ts-jest', {}] },
+  transform: { '^.+\\.tsx?$': ['ts-jest', {}] }, // "ts-jest"
   clearMocks: true,
 
   // Coverage
