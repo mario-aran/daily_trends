@@ -1,13 +1,12 @@
-import { ErrorWithStatus } from '@/types/error-with-status';
+import { HttpError } from '@/utils/http-error';
 import { NextFunction, Request, Response } from 'express';
 
 export const handleNotFound = (
-  _req: Request,
+  _: Request,
   _res: Response,
   next: NextFunction,
 ) => {
-  const error: ErrorWithStatus = new Error('API route not found');
-  error.status = 404;
+  const error = new HttpError(404, 'API route not found');
 
   next(error);
 };

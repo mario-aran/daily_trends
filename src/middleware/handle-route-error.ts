@@ -1,9 +1,9 @@
 import { NODE_ENV } from '@/config/env';
-import { ErrorWithStatus } from '@/types/error-with-status';
+import { HttpError } from '@/utils/http-error';
 import { NextFunction, Request, Response } from 'express';
 
 export const handleRouteError = (
-  err: ErrorWithStatus,
+  err: HttpError,
   _: Request,
   res: Response,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
