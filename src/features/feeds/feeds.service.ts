@@ -55,9 +55,9 @@ class FeedsService {
 
     // Insert non-existing feeds
     for (const scrapedFeed of scrapedFeeds) {
-      await Feed.create(scrapedFeed).catch((err) => {
+      await Feed.create(scrapedFeed).catch(() => {
         const shortHeadline = scrapedFeed.headline.slice(0, 10);
-        console.error(`Error inserting feed ${shortHeadline}: ${err.message}`);
+        console.warn(`Feed '${shortHeadline}' already exists.`);
       });
     }
 
