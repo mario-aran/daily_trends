@@ -11,7 +11,11 @@ const source = z.string().trim().min(3).max(20);
 // Schemas
 const feedsZodReadAllQuery = z.object({ sortOrder, limit, skip }).partial();
 const feedsZodCreateBody = z.object({ url, headline, source });
-const feedsZodUpdateBody = feedsZodCreateBody.partial();
+const feedsZodUpdateBody = feedsZodCreateBody
+  .partial()
+  .refine((data) => Object.values(data).some((value) => value !== undefined), {
+    message: 'At least one field must be provided',
+  });
 
 // Request schemas
 export const feedsZodReadAllRequest = z.object({ query: feedsZodReadAllQuery });
