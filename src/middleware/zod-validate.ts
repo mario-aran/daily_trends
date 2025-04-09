@@ -1,8 +1,6 @@
+import { HTTP_STATUS } from '@/constants/http-status';
 import { NextFunction, Request, Response } from 'express';
 import { AnyZodObject, ZodError, ZodIssue } from 'zod';
-
-// Constants
-const STATUS_UNPROCESSABLE = 422;
 
 export const zodValidate = (schema: AnyZodObject) => {
   return (req: Request, res: Response, next: NextFunction) => {
@@ -21,8 +19,8 @@ export const zodValidate = (schema: AnyZodObject) => {
           message: issue.message,
         }));
 
-        res.status(STATUS_UNPROCESSABLE).json({
-          status: STATUS_UNPROCESSABLE,
+        res.status(HTTP_STATUS.UNPROCESSABLE).json({
+          status: HTTP_STATUS.UNPROCESSABLE,
           message: 'Invalid data',
           details: errorDetails,
         });
