@@ -10,7 +10,7 @@
 
 ## Arquitectura
 
-![app-architecture](/resources/architecture.png)
+![app-architecture](/resources/architecture-diag.png)
 
 ---
 
