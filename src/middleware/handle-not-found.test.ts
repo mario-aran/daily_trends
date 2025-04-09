@@ -1,18 +1,34 @@
-import { app } from '@/server/app';
+import { HTTP_STATUS } from '@/constants/http-status';
+import express from 'express';
 import request from 'supertest';
+import { handleNotFound } from './handle-not-found';
+import { handleRouteError } from './handle-route-error';
 
 // Constants
-const STATUS_NOT_FOUND = 404;
+const TEST_ROUTE = '/test';
+
+// Express setup
+const app = express();
+
+app.get(TEST_ROUTE, (_, res) => {
+  res.send('');
+});
+
+app.use(handleNotFound);
+app.use(handleRouteError);
 
 describe('handleNotFound', () => {
-  it('should return a 404 error for unknown routes', async () => {
-    const response = await request(app).get('/api/unknown-route');
+  // Test cases
+  it('should return success when route exists', async () => {
+    const response = await request(app).get(TEST_ROUTE);
 
-    expect(response.status).toBe(STATUS_NOT_FOUND);
-    expect(response.body).toEqual({
-      status: STATUS_NOT_FOUND,
-      message: 'API route not found',
-      stack: expect.any(String),
-    });
+    expect(response.status).toBe(HTTP_STATUS.OK);
+  });
+
+  it('should return not found when route does not exists', async () => {
+    const response = await request(app).get('/non-existent-route');
+
+    expect(response.status).toBe(HTTP_STATUS.NOT_FOUND);
+    expect(response.body.message).toBe('API route not found');
   });
 });

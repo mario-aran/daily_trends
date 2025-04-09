@@ -4,6 +4,7 @@ import { NextFunction, Request, Response } from 'express';
 import { handleRouteError } from './handle-route-error';
 
 describe('handleRouteError', () => {
+  // Setup
   let req: Partial<Request>;
   let res: Partial<Response>;
   let next: NextFunction;
@@ -14,7 +15,8 @@ describe('handleRouteError', () => {
     next = jest.fn();
   });
 
-  it('should return specific status and message', () => {
+  // Test cases
+  it('should return custom status and message', () => {
     const error = new HttpError(HTTP_STATUS.NOT_FOUND, 'Test error');
 
     handleRouteError(error, req as Request, res as Response, next);
@@ -28,7 +30,7 @@ describe('handleRouteError', () => {
     );
   });
 
-  it('should return default status and message', () => {
+  it('should return internal server error', () => {
     const error = new Error();
 
     handleRouteError(error as HttpError, req as Request, res as Response, next);

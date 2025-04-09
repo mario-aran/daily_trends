@@ -16,9 +16,9 @@
     "format": "prettier --write .",
     "lint": "tsc --noEmit && eslint . --fix",
     "test": "jest --watch",
-    "coverage": "jest --watch --coverage",
-    "clean:all": "find . -type d \\( -name 'node_modules' -o -name 'dist' \\) -prune -exec rm -rf {} +",
-    "files:to-lf": "find . -type f ! -path './node_modules/*' ! -path './dist/*' -exec dos2unix {} +"
+    "test:coverage": "jest --watch --coverage",
+    "clean:all": "find . -type d \\( -name 'node_modules' -o -name 'dist' -o -name 'coverage' \\) -prune -exec rm -rf {} +",
+    "files:to-lf": "find . -type f ! -path './node_modules/*' ! -path './dist/*' ! -path './coverage/*' -exec dos2unix {} +"
   },
   "dependencies": {
     "axios": "^1.8.4",

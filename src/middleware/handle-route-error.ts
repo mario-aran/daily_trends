@@ -1,4 +1,3 @@
-import { NODE_ENV } from '@/config/env';
 import { HTTP_STATUS } from '@/constants/http-status';
 import { HttpError } from '@/utils/http-error';
 import { NextFunction, Request, Response } from 'express';
@@ -15,6 +14,5 @@ export const handleRouteError = (
   res.status(errorStatus).json({
     status: errorStatus,
     message: err.message || 'Internal Server Error',
-    stack: NODE_ENV !== 'production' ? err.stack : undefined,
   });
 };
