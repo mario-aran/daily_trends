@@ -1,15 +1,15 @@
-// "typescript-eslint": https://typescript-eslint.io/getting-started/#step-2-configuration
-
 import eslint from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import checkFile from 'eslint-plugin-check-file';
+import pluginJest from 'eslint-plugin-jest';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
+  // Ignores
   { ignores: ['dist'] },
 
-  // Config
+  // Base config
   {
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
@@ -49,5 +49,16 @@ export default tseslint.config(
         { ignoreMiddleExtensions: true },
       ],
     },
+  },
+
+  // Jest config
+  {
+    files: ['**/*.{spec,test}.{ts,tsx}'],
+    languageOptions: {
+      globals: pluginJest.environments.globals.globals, // Global variables available to Jest
+    },
+    extends: [
+      pluginJest.configs['flat/recommended'], // "eslint-plugin-jest"
+    ],
   },
 );

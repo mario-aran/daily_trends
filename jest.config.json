@@ -1,1 +1,12 @@
-{}
+{
+  "testEnvironment": "node",
+  "transform": { "^.+.tsx?$": ["ts-jest", {}] },
+  "moduleDirectories": ["node_modules", "src"],
+  "moduleNameMapper": { "^@/(.*)$": "<rootDir>/src/$1" },
+  "clearMocks": true,
+
+  "collectCoverage": true,
+  "collectCoverageFrom": ["src/**/*.{ts,tsx}"],
+  "coverageProvider": "v8",
+  "coverageDirectory": "coverage"
+}
