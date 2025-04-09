@@ -1,4 +1,4 @@
-import { NODE_ENV } from '@/config/env';
+import { HTTP_STATUS } from '@/constants/http-status';
 import { HttpError } from '@/utils/http-error';
 import { NextFunction, Request, Response } from 'express';
 
@@ -9,11 +9,10 @@ export const handleRouteError = (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _next: NextFunction,
 ) => {
-  const errorStatus = err.status ?? 500;
+  const errorStatus = err.status ?? HTTP_STATUS.SERVER_ERROR;
 
   res.status(errorStatus).json({
     status: errorStatus,
     message: err.message || 'Internal Server Error',
-    stack: NODE_ENV !== 'production' ? err.stack : undefined,
   });
 };
