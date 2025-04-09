@@ -52,3 +52,13 @@ Otros Detalles
 - Utilizar las buenas prácticas que conozcas.
 - Demostrar conocimientos de OOP: abstracción, encapsulamiento, herencia y polimorfismo.
 - [ ] Realizar los tests que consideres necesarios.
+
+---
+
+Tests
+
+- zod-validate
+- handle-route-error
+- handle-not-found
+- feeds.controller
+- feeds.service
