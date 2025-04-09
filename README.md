@@ -40,4 +40,4 @@ Otros Detalles
 - [x] Representar en un dibujo la arquitectura y las capas de la aplicación.
 - Utilizar las buenas prácticas que conozcas.
 - Demostrar conocimientos de OOP: abstracción, encapsulamiento, herencia y polimorfismo.
-- [ ] Realizar los tests que consideres necesarios.
+- [x] Realizar los tests que consideres necesarios.
