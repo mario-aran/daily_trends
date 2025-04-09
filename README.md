@@ -8,20 +8,9 @@
 - api url: "http://localhost:3000/api"
 - mongo-express url: "http://localhost:8081"
 
-## Librerías
+## Arquitectura
 
-- [x] typescript | tsx | tsc-alias
-- [x] prettier
-- [x] typescript-eslint | eslint | @eslint/js | globals | eslint-config-prettier | eslint-plugin-check-file | eslint-plugin-jest
-- [x] express | @types/express | @types/node
-- [x] dotenv
-- [x] mongoose
-- [x] zod
-- [x] luxon | @types/luxon
-- [x] cheerio | @types/cheerio | axios
-- [x] ts-jest | jest | @types/jest
-- [x] supertest | @types/supertest
-- [x] mongodb-memory-server
+![app-architecture](/resources/architecture.png)
 
 ---
 
@@ -48,17 +37,12 @@ Tareas
 
 Otros Detalles
 
-- [ ] Representar en un dibujo la arquitectura y las capas de la aplicación.
+- [x] Representar en un dibujo la arquitectura y las capas de la aplicación.
 - Utilizar las buenas prácticas que conozcas.
 - Demostrar conocimientos de OOP: abstracción, encapsulamiento, herencia y polimorfismo.
 - [ ] Realizar los tests que consideres necesarios.
-
----
-
-Tests
-
-- zod-validate
-- handle-route-error
-- handle-not-found
-- feeds.controller
-- feeds.service
+  - zod-validate
+  - handle-route-error
+  - handle-not-found
+  - feeds.controller
+  - feeds.service
